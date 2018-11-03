@@ -1,7 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+//Passport  config
+require('./config/passport')(passport);
+
+//Load routes
+const auth = require('./routes/auth');
 
 const app = express();
+
+//use routes
+app.use('/auth',auth);
 
 app.get('/',(req,res) => {
     res.send('Home page');

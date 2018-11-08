@@ -56,11 +56,13 @@ router.get("/user/:userId", (req, res) => {
 
 //Logged in user story
 router.get("/my", ensureAuthenticated, (req, res) => {
+  let myPage = true;
   Story.find({ user: req.user.id })
     .populate("user")
     .then(stories => {
       res.render("stories/index", {
-        stories: stories
+        stories: stories,
+        myPage
       });
     });
 });
